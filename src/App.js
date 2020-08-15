@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import Header from './components/header/Header';
 
 export default class App extends Component {
   render() {
-    return <p>react-salary</p>;
+    return (
+      <div className="container">
+        <Header />
+      </div>
+    );
   }
 }

@@ -65,7 +65,6 @@ export default class App extends Component {
 
   render() {
     const {
-      fullSalary,
       baseINSS,
       baseIRPF,
       discountINSS,
@@ -86,6 +85,7 @@ export default class App extends Component {
           />
           <ReadOnlyInput
             textColor={'#e67e22'}
+            percentageValue={progDiscountINSS}
             value={numberFormat(discountINSS)}
             inputLabel={'Desconto INSS:'}
           />
@@ -95,6 +95,7 @@ export default class App extends Component {
           />
           <ReadOnlyInput
             textColor={'#c0392b'}
+            percentageValue={progDiscountIRPF}
             value={numberFormat(discountIRPF)}
             inputLabel={'Desconto IRPF:'}
           />
@@ -102,6 +103,7 @@ export default class App extends Component {
         <div style={styles.flexRow}>
           <ReadOnlyInput
             textColor={'#16a085'}
+            percentageValue={progNetSalary}
             value={numberFormat(netSalary)}
             inputLabel={'Salário líquido:'}
           />

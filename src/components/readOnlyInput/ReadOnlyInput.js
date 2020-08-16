@@ -3,7 +3,7 @@ import css from './readOnlyInput.module.css';
 
 export default class ReadOnlyInput extends Component {
   render() {
-    const { inputLabel, value, textColor } = this.props;
+    const { inputLabel, value, textColor, percentageValue } = this.props;
     return (
       <div
         style={{ borderColor: textColor }}
@@ -15,7 +15,11 @@ export default class ReadOnlyInput extends Component {
             fontWeight: 'bold',
             borderColor: textColor,
           }}
-          value={value}
+          value={
+            typeof percentageValue === 'undefined'
+              ? value
+              : `${value} (${percentageValue.toFixed(2)}%)`
+          }
           type="text"
           readOnly
         />

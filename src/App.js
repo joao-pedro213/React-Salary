@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/header/Header';
 import SalaryInput from './components/salaryInput/SalaryInput';
 import ReadOnlyInput from './components/readOnlyInput/ReadOnlyInput';
+import ProgressBar from './components/progressBar/ProgressBar.js';
 import { calculateSalaryFrom } from './controller/salaryController.js';
 import { numberFormat } from './helpers/numberFormat.js';
 
@@ -15,6 +16,9 @@ export default class App extends Component {
       discountINSS: 0,
       discountIRPF: 0,
       netSalary: 0,
+      progNetSalary: 0,
+      progDiscountINSS: 0,
+      progDiscountIRPF: 0,
     };
   }
 
@@ -27,6 +31,11 @@ export default class App extends Component {
       discountIRPF,
       netSalary,
     } = calculateSalaryFrom(typedSalary);
+    const {
+      aPercentual,
+      bPercentual,
+      cPercentual,
+    } = this.calculatePercentageFrom(netSalary, discountINSS, discountIRPF);
     this.setState({
       fullSalary: typedSalary,
       baseINSS,
@@ -34,7 +43,23 @@ export default class App extends Component {
       discountINSS,
       discountIRPF,
       netSalary,
+      progNetSalary: aPercentual,
+      progDiscountINSS: bPercentual,
+      progDiscountIRPF: cPercentual,
     });
+  };
+
+  calculatePercentageFrom = (a, b, c) => {
+    let total = a + b + c === 0 ? 1 : a + b + c;
+    const aPercentual = (a * 100) / total;
+    const bPercentual = (b * 100) / total;
+    const cPercentual = (c * 100) / total;
+
+    return {
+      aPercentual,
+      bPercentual,
+      cPercentual,
+    };
   };
 
   render() {
@@ -45,6 +70,9 @@ export default class App extends Component {
       discountINSS,
       discountIRPF,
       netSalary,
+      progNetSalary,
+      progDiscountINSS,
+      progDiscountIRPF,
     } = this.state;
     return (
       <div className="container">
@@ -76,6 +104,17 @@ export default class App extends Component {
             value={numberFormat(netSalary)}
             inputLabel={'Salário líquido:'}
           />
+        </div>
+        <div style={styles.flexRow}>
+          <ProgressBar
+            widthValue={progDiscountINSS}
+            referenceColor={'#e67e22'}
+          />
+          <ProgressBar
+            widthValue={progDiscountIRPF}
+            referenceColor={'#c0392b'}
+          />
+          <ProgressBar widthValue={progNetSalary} referenceColor={'#16a085'} />
         </div>
       </div>
     );

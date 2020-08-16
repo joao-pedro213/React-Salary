@@ -3,6 +3,7 @@ import Header from './components/header/Header';
 import SalaryInput from './components/salaryInput/SalaryInput';
 import ReadOnlyInput from './components/readOnlyInput/ReadOnlyInput';
 import { calculateSalaryFrom } from './controller/salaryController.js';
+import { numberFormat } from './helpers/numberFormat.js';
 
 export default class App extends Component {
   constructor() {
@@ -48,28 +49,31 @@ export default class App extends Component {
     return (
       <div className="container">
         <Header />
-        <SalaryInput
-          inputValue={fullSalary}
-          onChangeInput={this.handleInputChangeValue}
-        />
+        <SalaryInput onChangeInput={this.handleInputChangeValue} />
         <div style={styles.flexRow}>
-          <ReadOnlyInput value={baseINSS} inputLabel={'Base INSS:'} />
+          <ReadOnlyInput
+            value={numberFormat(baseINSS)}
+            inputLabel={'Base INSS:'}
+          />
           <ReadOnlyInput
             textColor={'#e67e22'}
-            value={discountINSS}
+            value={numberFormat(discountINSS)}
             inputLabel={'Desconto INSS:'}
           />
-          <ReadOnlyInput value={baseIRPF} inputLabel={'Base IRPF:'} />
+          <ReadOnlyInput
+            value={numberFormat(baseIRPF)}
+            inputLabel={'Base IRPF:'}
+          />
           <ReadOnlyInput
             textColor={'#c0392b'}
-            value={discountIRPF}
+            value={numberFormat(discountIRPF)}
             inputLabel={'Desconto IRPF:'}
           />
         </div>
         <div style={styles.flexRow}>
           <ReadOnlyInput
             textColor={'#16a085'}
-            value={netSalary}
+            value={numberFormat(netSalary)}
             inputLabel={'Salário líquido:'}
           />
         </div>

@@ -5,6 +5,7 @@ import ReadOnlyInput from './components/readOnlyInput/ReadOnlyInput';
 import ProgressBar from './components/progressBar/ProgressBar.js';
 import { calculateSalaryFrom } from './controller/salaryController.js';
 import { numberFormat } from './helpers/numberFormat.js';
+import Footer from './components/footer/Footer';
 
 export default class App extends Component {
   constructor() {
@@ -116,6 +117,7 @@ export default class App extends Component {
           />
           <ProgressBar widthValue={progNetSalary} referenceColor={'#16a085'} />
         </div>
+        <Footer />
       </div>
     );
   }

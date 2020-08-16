@@ -8,6 +8,7 @@ export default class ProgressBar extends Component {
         style={{
           backgroundColor: referenceColor,
           height: '25px',
+          marginTop: '30px',
           width: `${widthValue}%`,
         }}
       ></div>
